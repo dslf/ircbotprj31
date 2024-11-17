@@ -1,0 +1,1 @@
+Compile with: gcc -ansi main.c -o main -lws2_32
