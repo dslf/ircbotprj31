@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include <winsock2.h>
 #include <stdlib.h>
 #include <ws2tcpip.h>
@@ -10,6 +11,7 @@ int main(){
     const char *IRCServer = "104.152.54.53";
     int IRCPort = 6667;
     int result;
+    char send_buffer[512];
 
     result = WSAStartup(MAKEWORD(2, 2), &wsaData);
     if (result != 0) {
@@ -39,6 +41,13 @@ int main(){
     }
 
     printf("Connected to IRC server at %s:%d\n", IRCServer, IRCPort);
+    strcpy(send_buffer, "NICK tezdsttter");  
+    send(sock, send_buffer,strlen(send_buffer));
+    
+    strcpy(send_buffer, "USER tezdstttefr");  
+    /* strcat(send_buffer, ""); */
+
+    send(sock, send_buffer,strlen(send_buffer));
 
     closesocket(sock);
     WSACleanup();
